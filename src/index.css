@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", "Montserrat", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Roboto Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Print-specific layout declarations */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Hide the main React app components and wrappers */
+  #root, .no-print {
+    display: none !important;
+  }
+  
+  /* Ensure the custom print section fills the entire sheet */
+  #print-section {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 210mm; /* A4 width */
+    height: 297mm; /* A4 height */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Force background colors and borders to print properly */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .print-page {
+    width: 210mm;
+    height: 297mm;
+    page-break-after: always;
+    padding: 12mm 10mm;
+    box-sizing: border-box;
+    display: grid !important;
+    grid-template-columns: repeat(2, 90mm) !important;
+    gap: 12mm 10mm !important;
+    align-content: start;
+    justify-content: start;
+  }
+
+  /* Prevent split cells inside a card */
+  .print-card-wrapper {
+    width: 90mm;
+    height: 55mm;
+    page-break-inside: avoid !important;
+    overflow: hidden;
+    box-shadow: none !important;
+    border-radius: 4px !important;
+  }
+}
+
